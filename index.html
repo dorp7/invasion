@@ -1,0 +1,911 @@
+<doctype html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <style>
+                table, th, td {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                }
+
+                tr {
+                    height: 50px;
+                }
+
+                td {
+                    width: 50px;
+                }
+
+                button {
+                    border: none;
+                    background-color: White;
+                }
+
+                button.bordered {
+                    border-style: solid;
+                    border-width: 5px;
+                }
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                }
+
+                .top-left {
+                    position: absolute;
+                    top: 2px;
+                    left: 4px;
+                }
+
+                .container {
+                    position: relative;
+                    text-align: center;
+                    color: white;
+                }
+
+                .float-right {
+                    float: right;
+                }
+            </style>
+            <title>Invasion 2</title>
+            <!-- Load external CSS styles -->
+            <link rel="stylesheet" href="styles.css">
+        </head>
+        <body>
+            <h1 id="samuel">Invasion</h1>
+            <button type="button" onclick="runGame()">Click Me To Start A New Game!</button>
+            <!-- row 1 style="border:1px; background-color: Gray;"-->
+            <button type="button" onclick="instructions()">Click Me To See Instructions!</button>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdz3ktHUlrNFGbDH0yMBIrsulR-BPY8AID4bdLkp63xPQ8dqA/viewform">Click Me To Send Feedback!</a>
+            <button type="button" onclick="options()">Click Me To Change Options!</button>
+            <pre id="demo"></pre>
+            <pre id="test"></pre>
+            <p id="test1" style="display:none;"></p>
+            <p id="test2" style="display:none;"></p>
+            <p id="test3" style="display:none;"></p>
+            <p id="test4" style="display:none;"></p>
+            <p id="test5" style="display:none;"></p>
+            <p id="option1" style="display:none;">
+                <button type="button" onclick="changeOption(1)" style="float:right;width:42px;height:42px;">
+                    <img id="option1im" src="" alt="Yes">
+                </button>
+                Soldiers heal every round
+            </p>
+            <p id="option2" style="display:none;">
+                <button type="button" onclick="changeOption(2)" style="float:right;width:42px;height:42px;">
+                    <img id="option2im" src="" alt="Yes">
+                </button>
+                Cannons reload every round
+            </p>
+            <p id="option3" style="display:none;">
+                <button type="button" onclick="changeOption(3)" style="float:right;width:42px;height:42px;">
+                    <img id="option3im" src="" alt="Yes">
+                </button>
+                Play untill you lose
+            </p>
+            <button type="button" id="option3" style="display:none;">easy</button>
+            <p id="option5" style="display:none;"></p>
+            <p id="API" style="display:none;"></p>
+            <!-- API = Actions and Prex Information -->
+            <table id="tableScreen" style="visibility:hidden;">
+                <tr>
+                    <!-- row 1 -->
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(0,0)">
+                                <img id="00" src="" alt="">
+                                <div id="00t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(0,1)">
+                                <img id="01" src="" alt="">
+                                <div id="01t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(0,2)">
+                                <img id="02" src="" alt="">
+                                <div id="02t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(0,3)">
+                                <img id="03" src="" alt="">
+                                <div id="03t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(0,4)">
+                                <img id="04" src="" alt="">
+                                <div id="04t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(0,5)">
+                                <img id="05" src="" alt="">
+                                <div id="05t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(0,6)">
+                                <img id="06" src="" alt="">
+                                <div id="06t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(0,7)">
+                                <img id="07" src="" alt="">
+                                <div id="07t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(0,8)">
+                                <img id="08" src="" alt="">
+                                <div id="08t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(0,9)">
+                                <img id="09" src="" alt="">
+                                <div id="09t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(0,10)">
+                                <img id="010" src="" alt="">
+                                <div id="010t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(0,11)">
+                                <img id="011" src="" alt="">
+                                <div id="011t" class="top-left"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- row 2 -->
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(1,0)">
+                                <img id="10" src="" alt="">
+                                <div id="10t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(1,1)">
+                                <img id="11" src="" alt="">
+                                <div id="11t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(1,2)">
+                                <img id="12" src="" alt="">
+                                <div id="12t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(1,3)">
+                                <img id="13" src="" alt="">
+                                <div id="13t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(1,4)">
+                                <img id="14" src="" alt="">
+                                <div id="14t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(1,5)">
+                                <img id="15" src="" alt="">
+                                <div id="15t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(1,6)">
+                                <img id="16" src="" alt="">
+                                <div id="16t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(1,7)">
+                                <img id="17" src="" alt="">
+                                <div id="17t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(1,8)">
+                                <img id="18" src="" alt="">
+                                <div id="18t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(1,9)">
+                                <img id="19" src="" alt="">
+                                <div id="19t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(1,10)">
+                                <img id="110" src="" alt="">
+                                <div id="110t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(1,11)">
+                                <img id="111" src="" alt="">
+                                <div id="111t" class="top-left"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- row 3 -->
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(2,0)">
+                                <img id="20" src="" alt="">
+                                <div id="20t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(2,1)">
+                                <img id="21" src="" alt="">
+                                <div id="21t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(2,2)">
+                                <img id="22" src="" alt="">
+                                <div id="22t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(2,3)">
+                                <img id="23" src="" alt="">
+                                <div id="23t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(2,4)">
+                                <img id="24" src="" alt="">
+                                <div id="24t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(2,5)">
+                                <img id="25" src="" alt="">
+                                <div id="25t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(2,6)">
+                                <img id="26" src="" alt="">
+                                <div id="26t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(2,7)">
+                                <img id="27" src="" alt="">
+                                <div id="27t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(2,8)">
+                                <img id="28" src="" alt="">
+                                <div id="28t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(2,9)">
+                                <img id="29" src="" alt="">
+                                <div id="29t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(2,10)">
+                                <img id="210" src="" alt="">
+                                <div id="210t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(2,11)">
+                                <img id="211" src="" alt="">
+                                <div id="211t" class="top-left"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- row 4 -->
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(3,0)">
+                                <img id="30" src="" alt="">
+                                <div id="30t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(3,1)">
+                                <img id="31" src="" alt="">
+                                <div id="31t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(3,2)">
+                                <img id="32" src="" alt="">
+                                <div id="32t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(3,3)">
+                                <img id="33" src="" alt="">
+                                <div id="33t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(3,4)">
+                                <img id="34" src="" alt="">
+                                <div id="34t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(3,5)">
+                                <img id="35" src="" alt="">
+                                <div id="35t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(3,6)">
+                                <img id="36" src="" alt="">
+                                <div id="36t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(3,7)">
+                                <img id="37" src="" alt="">
+                                <div id="37t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(3,8)">
+                                <img id="38" src="" alt="">
+                                <div id="38t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(3,9)">
+                                <img id="39" src="" alt="">
+                                <div id="39t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(3,10)">
+                                <img id="310" src="" alt="">
+                                <div id="310t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(3,11)">
+                                <img id="311" src="" alt="">
+                                <div id="311t" class="top-left"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- row 5 -->
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(4,0)">
+                                <img id="40" src="" alt="">
+                                <div id="40t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(4,1)">
+                                <img id="41" src="" alt="">
+                                <div id="41t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(4,2)">
+                                <img id="42" src="" alt="">
+                                <div id="42t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(4,3)">
+                                <img id="43" src="" alt="">
+                                <div id="43t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(4,4)">
+                                <img id="44" src="" alt="">
+                                <div id="44t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(4,5)">
+                                <img id="45" src="" alt="">
+                                <div id="45t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(4,6)">
+                                <img id="46" src="" alt="">
+                                <div id="46t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(4,7)">
+                                <img id="47" src="" alt="">
+                                <div id="47t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(4,8)">
+                                <img id="48" src="" alt="">
+                                <div id="48t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(4,9)">
+                                <img id="49" src="" alt="">
+                                <div id="49t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(4,10)">
+                                <img id="410" src="" alt="">
+                                <div id="410t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(4,11)">
+                                <img id="411" src="" alt="">
+                                <div id="411t" class="top-left"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- row 6 -->
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(5,0)">
+                                <img id="50" src="" alt="">
+                                <div id="50t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(5,1)">
+                                <img id="51" src="" alt="">
+                                <div id="51t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(5,2)">
+                                <img id="52" src="" alt="">
+                                <div id="52t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(5,3)">
+                                <img id="53" src="" alt="">
+                                <div id="53t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(5,4)">
+                                <img id="54" src="" alt="">
+                                <div id="54t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(5,5)">
+                                <img id="55" src="" alt="">
+                                <div id="55t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(5,6)">
+                                <img id="56" src="" alt="">
+                                <div id="56t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(5,7)">
+                                <img id="57" src="" alt="">
+                                <div id="57t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(5,8)">
+                                <img id="58" src="" alt="">
+                                <div id="58t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(5,9)">
+                                <img id="59" src="" alt="">
+                                <div id="59t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(5,10)">
+                                <img id="510" src="" alt="">
+                                <div id="510t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(5,11)">
+                                <img id="511" src="" alt="">
+                                <div id="511t" class="top-left"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- row 7 -->
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(6,0)">
+                                <img id="60" src="" alt="">
+                                <div id="60t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(6,1)">
+                                <img id="61" src="" alt="">
+                                <div id="61t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(6,2)">
+                                <img id="62" src="" alt="">
+                                <div id="62t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(6,3)">
+                                <img id="63" src="" alt="">
+                                <div id="63t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(6,4)">
+                                <img id="64" src="" alt="">
+                                <div id="64t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(6,5)">
+                                <img id="65" src="" alt="">
+                                <div id="65t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(6,6)">
+                                <img id="66" src="" alt="">
+                                <div id="66t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(6,7)">
+                                <img id="67" src="" alt="">
+                                <div id="67t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(6,8)">
+                                <img id="68" src="" alt="">
+                                <div id="68t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(6,9)">
+                                <img id="69" src="" alt="">
+                                <div id="69t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(6,10)">
+                                <img id="610" src="" alt="">
+                                <div id="610t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(6,11)">
+                                <img id="611" src="" alt="">
+                                <div id="611t" class="top-left"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- row 8 -->
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(7,0)">
+                                <img id="70" src="" alt="">
+                                <div id="70t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(7,1)">
+                                <img id="71" src="" alt="">
+                                <div id="71t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(7,2)">
+                                <img id="72" src="" alt="">
+                                <div id="72t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(7,3)">
+                                <img id="73" src="" alt="">
+                                <div id="73t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(7,4)">
+                                <img id="74" src="" alt="">
+                                <div id="74t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(7,5)">
+                                <img id="75" src="" alt="">
+                                <div id="75t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(7,6)">
+                                <img id="76" src="" alt="">
+                                <div id="76t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(7,7)">
+                                <img id="77" src="" alt="">
+                                <div id="77t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(7,8)">
+                                <img id="78" src="" alt="">
+                                <div id="78t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(7,9)">
+                                <img id="79" src="" alt="">
+                                <div id="79t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(7,10)">
+                                <img id="710" src="" alt="">
+                                <div id="710t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(7,11)">
+                                <img id="711" src="" alt="">
+                                <div id="711t" class="top-left"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- row 9 -->
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(8,0)">
+                                <img id="80" src="" alt="">
+                                <div id="80t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(8,1)">
+                                <img id="81" src="" alt="">
+                                <div id="81t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(8,2)">
+                                <img id="82" src="" alt="">
+                                <div id="82t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(8,3)">
+                                <img id="83" src="" alt="">
+                                <div id="83t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(8,4)">
+                                <img id="84" src="" alt="">
+                                <div id="84t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(8,5)">
+                                <img id="85" src="" alt="">
+                                <div id="85t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(8,6)">
+                                <img id="86" src="" alt="">
+                                <div id="86t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(8,7)">
+                                <img id="87" src="" alt="">
+                                <div id="87t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(8,8)">
+                                <img id="88" src="" alt="">
+                                <div id="88t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(8,9)">
+                                <img id="89" src="" alt="">
+                                <div id="89t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(8,10)">
+                                <img id="810" src="" alt="">
+                                <div id="810t" class="top-left"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" onclick="buttonPress(8,11)">
+                                <img id="811" src="" alt="">
+                                <div id="811t" class="top-left"></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!-- Load external JavaScript -->
+            <script src="scripts.js"></script>
+            <!-- style="width:170px;height:170px;margin-left:15px;" -->
+            <table id="buildScreen" class="float-right" style="visibility:hidden;">
+                <tr>
+                    <td>Cannon</td>
+                    <td>Farm</td>
+                    <td>House</td>
+                    <td>Soldier</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" onclick="actBuildPart2(1, 6)">
+                            <img src="./InvasionImages/cannon.jpeg" alt="">
+                    </td>
+                    <td>
+                        <button type="button" onclick="actBuildPart2(10, 3)">
+                            <img src="./InvasionImages/farm0.jpeg" alt="">
+                    </td>
+                    <td>
+                        <button type="button" onclick="actBuildPart2(8, 10)">
+                            <img src="./InvasionImages/house.jpeg" alt="">
+                    </td>
+                    <td>
+                        <button type="button" onclick="actBuildPart2(3, 2)">
+                            <img src="./InvasionImages/soldier3.jpeg" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>6 prex</td>
+                    <td>3 prex</td>
+                    <td id="houseCostDisplay">10 prex</td>
+                    <td>2 prex</td>
+                </tr>
+            </table>
+        </body>
+    </html>
