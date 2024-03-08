@@ -1,29 +1,28 @@
-let round; // to keep track of rounds
-let autoWin; //too keep track of if I want to win automatically
+let round; //to keep track of rounds
 let houseCost; //to keep track of house cost (cost increases the more you buy)
 let prex;  //prex=currency
 let act; //this is how many actions you get
-let totalAct; // how many your actions go up
+let totalAct; //how many your actions go up
 let enemyNumber; //how many enemies there are (this number used for determening if the player has won)
-let enemyAray;
-let pictureId;
-let whatSoldierRow;
-let whatSoldierColumn;
-let whatBuildRow;
-let whatBuildColumn;
-let building;
-let soldierMoves = 0;
-let buttonPressed = false;
-let totalPrexHarvested;
-let totalPrexSpent;
-let totalEnemiesKilled;
-let totalUnitsKilled;
-let totalUnitsBuilt;
-let instructionsOut = 0; 
-let optionsOut = 0; 
-let playTillLose = 1;
-let cannonsReload = 1;
-let soldiersHeal = 1;
+let enemyAray; //an aray used to keep track of enemies in the move enemies stage of a new round 
+let pictureId; //a string version of the Id of a certain space in the game used to change the image
+let whatSoldierRow; //the row that the curent moving soldier (if any) is in.
+let whatSoldierColumn; //the column that the curent moving soldier (if any) is in.
+let whatBuildRow; //the row that the curent proposed building site (if any) is in.
+let whatBuildColumn; //the column that the curent proposed building site (if any) is in.
+let building; //to let the program know if the player wants to build or not
+let soldierMoves = 0; //the amount of moves a soldier has left
+let buttonPressed = false; //to let the program know if a button has been pressed but not resolved 
+let totalPrexHarvested; //to keep track of the total prex harvested and show the player at the end of each game
+let totalPrexSpent; //to keep track of the total prexs pent and show the player at the end of each game
+let totalEnemiesKilled; //to keep track of the total enemies killed and show the player at the end of each game
+let totalUnitsKilled; //to keep track of and the total units killed show the player at the end of each game
+let totalUnitsBuilt; //to keep track of the total units built and show the player at the end of each game
+let instructionsOut = 0; //to tell the program weather to show the instructions or hide them
+let optionsOut = 0; //to tell the program weather to show the option or hide them
+let playTillLose = 1; //tells what option the player chose
+let cannonsReload = 1; //tells what option the player chose
+let soldiersHeal = 1; //tells what option the player chose
 //let 
 
 /*
@@ -44,7 +43,7 @@ let screen = [
 
 //
 
-function goThroughAray(myCallback) {
+function goThroughAray(myCallback) { //this function goes through every space on the screen and calls a function for each space
     let rowNumber = 0;
     let columNumber = 0;
     while (rowNumber < 9) {
@@ -59,7 +58,8 @@ function goThroughAray(myCallback) {
     }
 }
 
-function displayScreen(index1, index2) {
+//CALLBACK FUNCTIONS
+function displayScreen(index1, index2) { //this function, when used as the callback for the goThroughAray function, updates the website to have the corect pictures
     firstNumber = index1.toString();
     secondNumber = index2.toString();
     pictureId = firstNumber+secondNumber;
@@ -141,7 +141,7 @@ function displayScreen(index1, index2) {
 
 }
 
-function growFarm(index1, index2) {
+function growFarm(index1, index2) { //this function, when used as the callback for the goThroughAray function, makes all farm spaces grow
     if (screen[index1][index2] > 9) {
         if (screen[index1][index2] < 14) {
             screen[index1][index2] = screen[index1][index2] + 1
@@ -149,19 +149,19 @@ function growFarm(index1, index2) {
     }
 }
 
-function loadCannons(index1, index2) {
+function loadCannons(index1, index2) { //this function, when used as the callback for the goThroughAray function, reloads all canons
     if (screen[index1][index2] == 2) {
         screen[index1][index2] = 1;
     }
 }
 
-function healSoldiers(index1, index2) {
+function healSoldiers(index1, index2) { //this function, when used as the callback for the goThroughAray function, heals all soldiers one heart
     if (screen[index1][index2] == 4 || screen[index1][index2] == 5 ) {
         screen[index1][index2] = screen[index1][index2] -1;
     }
 }
 
-function bold(index1, index2, isBolded) {
+function bold(index1, index2, isBolded) { //this function unbolds the given space
     firstNumber = index1.toString();
     secondNumber = index2.toString();
     pictureId = firstNumber + secondNumber;
@@ -173,11 +173,12 @@ function bold(index1, index2, isBolded) {
     
 }
 
-function updateAPI() {
+//UTILITY FUNCTIONS
+function updateAPI() { //this function updates the Actions and Prex Information
     document.getElementById('API').innerHTML = "Round: " + round + "     Actions: " + act + "    Prex: " + prex;
 }
 
-function buttonPress(row, column) { 
+function buttonPress(row, column) { //this function is called when the player pushes a buton. It calls the function coresponding to the button pushed
     spaceNumber = screen[row][column];
     if (building == true){
         doneBuilding()
@@ -189,7 +190,7 @@ function buttonPress(row, column) {
     }
 }
 
-function makeArray(first, second) {
+function makeArray(first, second) { //this function adds one coordinate to the enemy aray
     let screenNumber = screen[first][second];
     if (screen[first][second] < 0) {
         screenNumber = screen[first][second];
@@ -198,7 +199,7 @@ function makeArray(first, second) {
     }
 }
 
-function moveEnemies() {
+function moveEnemies() { //this function moves the enemies
     goThroughAray(makeArray)
     let i;
     let wheremove;
@@ -324,7 +325,7 @@ function moveEnemies() {
     }
 }
 
-function runGame() {
+function runGame() { //this function starts a new game
     document.getElementById('test1').style.display = "none";
     document.getElementById('test2').style.display = "none";
     document.getElementById('test3').style.display = "none";
@@ -332,7 +333,6 @@ function runGame() {
     document.getElementById('test5').style.display = "none";
     goThroughAray(bold)
     round = 0; 
-    autoWin = false; 
     houseCost = 10; 
     prex = 20;  
     act = 0; 
@@ -366,7 +366,7 @@ function runGame() {
     nextRound()
 }
 
-function nextRound() {
+function nextRound() { //this function starts a new round
     moveEnemies()
     goThroughAray(growFarm)
     goThroughAray(healSoldiers)
@@ -376,7 +376,7 @@ function nextRound() {
     updateAPI()
 }
 
-function winCheck(){
+function winCheck(){ //this function checks if you have won and displays your statistics if you have
     if (enemyNumber <= 0) {
         goThroughAray(displayScreen)
         window.alert("YOU WON!!!!! good job doing better")
@@ -397,7 +397,7 @@ function winCheck(){
     }
 }
 
-function instructions(){
+function instructions(){ //this function shows or hides the instuctions
     instructionsOut = 1-instructionsOut;
     if (instructionsOut ==1){
         document.getElementById('demo').innerHTML = `this is invasion
@@ -444,7 +444,7 @@ The four units you can build are:
     }
 }
  
-function options(){
+function options(){ //this function shows or hides the options
     optionsOut = 1-optionsOut;
     if (optionsOut ==1){
         document.getElementById('option1').style.display = "block";
@@ -459,7 +459,7 @@ function options(){
     }
 }
 
-function changeOption(optionNumber){
+function changeOption(optionNumber){ //this function isnt finished yet
     window.alert("sory we cant do that yet" + optionNumber)
     switch(optionNumber){
         case 1:
@@ -476,7 +476,7 @@ function changeOption(optionNumber){
     }
 }
 
-function whatAction(row, column, spaceNumber) { 
+function whatAction(row, column, spaceNumber) { //this function determines what action you will take and calls the coresponding function
     let doneOrNot
     switch (spaceNumber) {
         case 0:
@@ -508,7 +508,7 @@ function whatAction(row, column, spaceNumber) {
     }
 }
 
-function actionResolve() {
+function actionResolve() { //this function is called once the player uses an action
     act = act - 1;
         if (act < 1) {
             nextRound()
@@ -518,7 +518,7 @@ function actionResolve() {
 }
 
 // ACTION FUNCTIONS
-function actBuild (row, column, spaceNumber) {
+function actBuild (row, column, spaceNumber) { //this function tells the program that the player wants to build
     building = true;
     whatBuildRow = row;
     whatBuildColumn = column;
@@ -526,7 +526,7 @@ function actBuild (row, column, spaceNumber) {
     document.getElementById('buildScreen').style.visibility = "visible";
 }
 
-function actBuildPart2(buildNumber, cost){
+function actBuildPart2(buildNumber, cost){ //this function builds
     if (buildNumber == 8) {
         cost = houseCost;
     }
@@ -551,7 +551,7 @@ function actBuildPart2(buildNumber, cost){
     
 }
 
-function doneBuilding(){
+function doneBuilding(){ //this function hides the build screen and tells the game that the player is done building
     bold(whatBuildRow, whatBuildColumn, false)
     document.getElementById('buildScreen').style.visibility = "hidden";
     whatBuildRow = undefined;
@@ -559,7 +559,7 @@ function doneBuilding(){
     building = false;
 }
 
-function actShootCannon (row, column, spaceNumber) {
+function actShootCannon (row, column, spaceNumber) { //look at name
     let shootcolumn = column;
     while (true){
         shootcolumn = shootcolumn + 1;
@@ -585,7 +585,7 @@ function actShootCannon (row, column, spaceNumber) {
     return "Action Done";
 }
 
-function actLoadCannon (row, column, spaceNumber) {
+function actLoadCannon (row, column, spaceNumber) {//look at name
     if (prex >= 1) {
         screen[row][column] = 1;
         prex = prex - 1;
@@ -595,14 +595,14 @@ function actLoadCannon (row, column, spaceNumber) {
     }
 }
 
-function actMoveSoldier (row, column, spaceNumber) {
+function actMoveSoldier (row, column, spaceNumber) { //this function tells the program that the player wants to move a soldier
     soldierMoves = 4;
     whatSoldierRow = row;
     whatSoldierColumn = column;
     bold(whatSoldierRow, whatSoldierColumn, true)
 }
 
-function actMoveSoldierPart2(row, column, spaceNumber) {//to do make a border function
+function actMoveSoldierPart2(row, column, spaceNumber) {//this function actualy moves the soldier
     if ((row == whatSoldierRow + 1 && column==whatSoldierColumn)||(row == whatSoldierRow - 1 && column==whatSoldierColumn)||(row == whatSoldierRow && column == whatSoldierColumn + 1)||(row == whatSoldierRow && column == whatSoldierColumn - 1)) {
         if (screen[row][column] == 0) {
             screen[row][column] = screen[whatSoldierRow][whatSoldierColumn];
@@ -660,7 +660,7 @@ function actMoveSoldierPart2(row, column, spaceNumber) {//to do make a border fu
     }
 }
 
-function actFarm (row, column, spaceNumber) {
+function actFarm (row, column, spaceNumber) { //see name
     screen[row][column] = 10;
     let prexOnFarm = spaceNumber - 10;
     prexOnFarm = prexOnFarm*2;
@@ -669,11 +669,11 @@ function actFarm (row, column, spaceNumber) {
     return "Action Done";
 }
 // OTHER FUNCTIONS
-function getRndInteger(min, max) {
+function getRndInteger(min, max) { //gets a random integer
   return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
-function cheatButton(){
+function cheatButton(){ //muahaha
     prex = prex + 100;
 }
 
